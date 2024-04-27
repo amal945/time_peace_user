@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "297847348415",
+    "project_id": "time-peace-final-project",
+    "storage_bucket": "time-peace-final-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297847348415:android:9cba8f18011a0c2b963a0a",
+        "android_client_info": {
+          "package_name": "com.example.time_peace_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9mNzjHoLBuBJUawx0EV3QAY5i_kSbm04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
