@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:time_peace_project/view/signup%20page/widgets/signup_password_textformfield.dart';
+import 'package:time_peace_project/view/signup_page/widgets/signup_password_textformfield.dart';
 import 'package:time_peace_project/widgets/constants.dart';
 import 'package:time_peace_project/widgets/custom_button.dart';
 import 'package:time_peace_project/widgets/global_widgets.dart';

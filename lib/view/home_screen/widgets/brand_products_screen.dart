@@ -1,34 +1,27 @@
-// ignore_for_file: prefer_final_fields, unused_field
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:time_peace_project/widgets/constants.dart';
+import '../../../model/functions.dart';
+import '../../../model/productmodel.dart';
+import '../../../widgets/constants.dart';
+import 'custom_product_widget.dart';
+import '../../product_screen/product_detail_screen.dart';
+import 'textfield_products_screen.dart';
 
-import '../../model/functions.dart';
-import '../../model/productmodel.dart';
-import '../home_screen/widgets/custom_product_widget.dart';
-import '../home_screen/widgets/textfield_products_screen.dart';
-import '../product_screen/product_detail_screen.dart';
-
-class GiftStore extends StatefulWidget {
-  const GiftStore({Key? key}) : super(key: key);
+class ScreenBrandProducts extends StatefulWidget {
+  const ScreenBrandProducts({Key? key, required this.brand}) : super(key: key);
+  final String brand;
 
   @override
-  State<GiftStore> createState() => _GiftStoreState();
+  State<ScreenBrandProducts> createState() => _ScreenBrandProductsState();
 }
 
-class _GiftStoreState extends State<GiftStore> {
+class _ScreenBrandProductsState extends State<ScreenBrandProducts> {
   late List<Product> _products = [];
   late TextEditingController _searchController;
-  bool _isFilter = false;
-  bool isMens = false;
-  bool isWomens = false;
-  bool isKids = false;
-  bool isFilterApplied = false;
-
   int upperValue = 0;
   int lowerValue = 0;
-
+  bool _isFilter = false;
+  bool isFilterApplied = false;
   @override
   void initState() {
     _searchController = TextEditingController();
@@ -41,14 +34,13 @@ class _GiftStoreState extends State<GiftStore> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text("Gift Collections"),
+          title: Text(widget.brand),
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Expanded(
                     child: ProductCustomTextField(
@@ -59,45 +51,30 @@ class _GiftStoreState extends State<GiftStore> {
                     ),
                   ),
                   !_isFilter
-                      ? Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: InkWell(
-                            onTap: () {
-                              showFilterBottomSheet(context);
-                              setState(() {
-                                _isFilter = !_isFilter;
-                              });
-                            },
-                            child: const Icon(
-                              Icons.filter_alt,
-                              size: 28,
-                            ),
-                          ),
+                      ? InkWell(
+                          onTap: () {
+                            showFilterBottomSheet(context);
+                            setState(() {
+                              _isFilter = !_isFilter;
+                            });
+                          },
+                          child: Icon(Icons.filter_alt),
                         )
-                      : Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                _isFilter = !_isFilter;
-                                isFilterApplied = false;
-                                isMens = false;
-                                isWomens = false;
-                                isKids = false;
-                              });
-                            },
-                            child: const Icon(
-                              Icons.close,
-                              size: 28,
-                            ),
-                          ),
+                      : InkWell(
+                          onTap: () {
+                            setState(() {
+                              _isFilter = !_isFilter;
+                              isFilterApplied = !isFilterApplied;
+                            });
+                          },
+                          child: Icon(Icons.close),
                         )
                 ],
               ),
               StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('products')
-                    .where('productType', isEqualTo: "Gift Collects")
+                    .where('brand', isEqualTo: widget.brand)
                     .snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -124,30 +101,6 @@ class _GiftStoreState extends State<GiftStore> {
                         .where((product) =>
                             product.price >= lowerValue &&
                             product.price <= upperValue &&
-                            product.productName.toLowerCase().contains(
-                                  _searchController.text.toLowerCase(),
-                                ))
-                        .toList();
-                  } else if (isMens) {
-                    filteredProducts = _products
-                        .where((product) =>
-                            product.category == "Mens" &&
-                            product.productName.toLowerCase().contains(
-                                  _searchController.text.toLowerCase(),
-                                ))
-                        .toList();
-                  } else if (isWomens) {
-                    filteredProducts = _products
-                        .where((product) =>
-                            product.category == "Womens" &&
-                            product.productName.toLowerCase().contains(
-                                  _searchController.text.toLowerCase(),
-                                ))
-                        .toList();
-                  } else if (isKids) {
-                    filteredProducts = _products
-                        .where((product) =>
-                            product.category == "Mens" &&
                             product.productName.toLowerCase().contains(
                                   _searchController.text.toLowerCase(),
                                 ))
@@ -223,89 +176,6 @@ class _GiftStoreState extends State<GiftStore> {
                       icon: const Icon(Icons.close))
                 ],
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          isMens = !isMens;
-                        });
-                      },
-                      child: Container(
-                          width: size.width / 2.5,
-                          height: size.height / 14,
-                          decoration: const BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Mens',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          )),
-                    ),
-                    kWidth8,
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          isWomens = !isWomens;
-                        });
-                      },
-                      child: Container(
-                          width: size.width / 2.5,
-                          height: size.height / 14,
-                          decoration: const BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Womens',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          )),
-                    ),
-                    kWidth8,
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          isKids = !isKids;
-                        });
-                      },
-                      child: Container(
-                          width: size.width / 2.5,
-                          height: size.height / 14,
-                          decoration: const BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Kids',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          )),
-                    ),
-                  ],
-                ),
-              ),
-              kSize20,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../view/dash screen/dash.dart';
+import '../view/dash_screen/dash.dart';
 
 class SignUpController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -34,11 +34,11 @@ class SignUpController extends GetxController {
           passwordController.text = "";
           confirmPasswordController.text = "";
           // Navigate to another page (replace 'YourPage()' with your desired page)
-          Get.offAll(Dash());
+          Get.offAll(const Dash());
         }
       } catch (e) {
         // Handle any errors that occur during sign-up
-        print("Error signing up: $e");
+      
         // Display error message to the user
         Get.snackbar(
           "Error",

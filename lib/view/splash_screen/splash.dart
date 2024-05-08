@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:time_peace_project/view/dash%20screen/dash.dart';
+import 'package:time_peace_project/view/dash_screen/dash.dart';
 
-import '../login in screen/login_page.dart';
+import '../login_in_screen/login_page.dart';
 
 class SplashScreen extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser;
@@ -12,9 +12,9 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 2), () {
       if (user != null) {
-        Get.off(() => const Dash());
+        Get.off(() => Dash());
       } else {
-        Get.off(() =>  LoginScreen());
+        Get.off(() => LoginScreen());
       }
     });
 

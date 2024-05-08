@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../view/dash screen/dash.dart';
-import '../view/forgot password screen/forgot_password_screen.dart';
-import '../view/signup page/signup_page.dart';
+import '../view/dash_screen/dash.dart';
+import '../view/forgot_password_screen/forgot_password_screen.dart';
+import '../view/signup_page/signup_page.dart';
 
 class LoginController extends GetxController {
   final _formKey = GlobalKey<FormState>();

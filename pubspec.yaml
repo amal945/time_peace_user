@@ -28,9 +28,10 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  action_slider: ^0.7.0
   cloud_firestore: ^4.14.0
   cupertino_icons: ^1.0.2
-  firebase_app_check: '^0.2.1+8'
+  firebase_app_check: ^0.2.1+8
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
   firebase_storage: ^11.6.0
@@ -41,6 +42,8 @@ dependencies:
   google_fonts: ^6.2.0
   google_nav_bar: ^5.0.6
   google_sign_in: ^6.1.6
+  like_button: ^2.0.5
+  lottie: ^2.7.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -68,6 +71,9 @@ flutter:
     - assets/men_with_watch.webp
     - assets/women_with_watch.jpg
     - assets/kids_with_watch.png
+    - assets/workwear_banner_1.webp
+    - assets/animations/Animation - grid_loading.json
+    - assets/black_watch_11_.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

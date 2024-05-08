@@ -12,9 +12,9 @@ class _ScreenAccountState extends State<ScreenAccount> {
   final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         body: Center(
-      child: Text("Profile Page "),
+      child: Text("Account Screen"),
     ));
   }
 }
